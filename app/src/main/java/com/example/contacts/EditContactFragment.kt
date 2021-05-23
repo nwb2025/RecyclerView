@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
+import com.bumptech.glide.Glide
 import com.example.contacts.utils.Person
 import org.w3c.dom.Text
 
@@ -32,12 +34,17 @@ class EditContactFragment (val person: Person) : DialogFragment() {
     }
     private fun initViews(view: View){
         val editContact = view.findViewById<ConstraintLayout>(R.id.edit_contact)
+        val contactImage: ImageView = view.findViewById(R.id.person_img)
         val editTextNumber = view.findViewById<EditText>(R.id.tv_num2)
         val editTextName = view.findViewById<EditText>(R.id.tv_name2)
         val textViewName: TextView = view.findViewById(R.id.tv_name2)
         val textViewNumber:TextView = view.findViewById(R.id.tv_num2)
         textViewName.text = person.name
         textViewNumber.text = person.number
+        Glide.with(view.context)
+                .load(person.avatarUrl)
+                .error(R.mipmap.ic_launcher_round)
+                .into(contactImage)
 
         editContact.setOnClickListener{
             when {
