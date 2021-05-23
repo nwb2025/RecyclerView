@@ -12,9 +12,10 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
+import com.example.contacts.utils.Person
 import org.w3c.dom.Text
 
-class EditContactFragment (val uid:Int) : DialogFragment() {
+class EditContactFragment (val person: Person) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +36,8 @@ class EditContactFragment (val uid:Int) : DialogFragment() {
         val editTextName = view.findViewById<EditText>(R.id.tv_name2)
         val textViewName: TextView = view.findViewById(R.id.tv_name2)
         val textViewNumber:TextView = view.findViewById(R.id.tv_num2)
-        textViewName.text = MainActivity.contactsList[uid].name
-        textViewNumber.text = MainActivity.contactsList[uid].number
+        textViewName.text = person.name
+        textViewNumber.text = person.number
 
         editContact.setOnClickListener{
             when {

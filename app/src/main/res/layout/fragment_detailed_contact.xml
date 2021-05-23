@@ -8,7 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_gray">
 
-    <View
+    <!--<ImageView
         android:id="@+id/person_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -16,6 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/image_form"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>!-->
+    <ImageView
+        android:id="@+id/person_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"/>
@@ -31,8 +41,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="22dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:singleLine="true"
+        android:maxLength="25"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_1"
@@ -61,6 +74,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:text="8 (950) 558-27-70"
             android:textColor="@color/blue"
+            android:maxLength="17"
+            android:singleLine="true"
             android:textSize="16sp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -85,25 +100,5 @@
             android:textColor="@color/black"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_contact"
-        android:layout_marginTop="22dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/rounded_corners_contact"
-        android:backgroundTint="@color/white"
-        android:padding="10dp">
-        <TextView
-            android:id="@+id/tv_num4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="Delete"
-            android:textColor="@color/red"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

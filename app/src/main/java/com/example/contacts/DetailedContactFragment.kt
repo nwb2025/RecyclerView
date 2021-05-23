@@ -7,16 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-
+import com.bumptech.glide.Glide
+import com.example.contacts.utils.Person
 
 class DetailedContactFragment(
-    val uid: Int,
-    private val onRefreshFragment: () -> Unit
+    val person: Person
 ) : Fragment() {
 
     private  val REQUEST_ONE = 1
+    var onUpdatedItem : (String,String) -> Unit = { _,_ -> }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,12 +36,17 @@ class DetailedContactFragment(
         val textViewName:TextView = view.findViewById(R.id.name)
         val number:TextView = view.findViewById(R.id.tv_num2)
         val editConstraintLayout:ConstraintLayout = view.findViewById(R.id.edit_contact)
+        val contactImage:ImageView = view.findViewById(R.id.person_img)
 
-        textViewName.text = MainActivity.contactsList[uid].name
-        number.text = MainActivity.contactsList[uid].number
+        textViewName.text = person.name
+        number.text = person.number
+        Glide.with(view.context)
+            .load(person.avatarUrl)
+            .error(R.mipmap.ic_launcher_round)
+            .into(contactImage)
 
         editConstraintLayout.setOnClickListener{
-            val fragment = EditContactFragment(uid)
+            val fragment = EditContactFragment(person)
             fragment.setTargetFragment(this,REQUEST_ONE)
             fragment.show(fragmentManager!!,"editDialog")
         }
@@ -49,15 +57,12 @@ class DetailedContactFragment(
         if ( resultCode == Activity.RESULT_OK){
             when(requestCode){
                 REQUEST_ONE -> {
-                    MainActivity.contactsList[uid].name = data?.getStringExtra("name")!!
-                    MainActivity.contactsList[uid].number = data?.getStringExtra("number")!!
+                   onUpdatedItem(
+                        data?.getStringExtra("name")!!,
+                        data?.getStringExtra("number")!!)
                 }
             }
         }
         activity?.supportFragmentManager?.popBackStack()
-        onRefreshFragment()
     }
-
-
-
 }

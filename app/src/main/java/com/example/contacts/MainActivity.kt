@@ -2,21 +2,29 @@ package com.example.contacts
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.FragmentManager
 import com.example.contacts.utils.Person
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var fragmentManager:FragmentManager
 
     companion object {
-        var contactsList:MutableList<Person> = mutableListOf(
-                Person("Steve","123"),
-                Person("Max","456"),
-                Person("Alex","789"),
-                Person("Robert","101112"))
+        var contactsList = mutableListOf<Person>()
+    }
+    init {
+        repeat(100){
+            contactsList.add(
+                Person(UUID.randomUUID().toString(),
+                (System.currentTimeMillis()/3600).toString(),
+                    "https://picsum.photos/${it}"
+            ))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?){
@@ -28,33 +36,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun onContactClicked(view: View){
-        var id = 0
-        when(view?.id){
-            R.id.person1 -> id = 0
-
-            R.id.person2 -> id = 1
-
-            R.id.person3 -> id = 2
-
-            R.id.person4 -> id = 3
-        }
-        onClickedItem(id)
-    }
-
-    fun onClickedItem(id:Int){
-        val fragmentContainer = findViewById<FrameLayout>(R.id.container1)
-        if ( fragmentContainer != null){
-            fragmentManager.beginTransaction()
-                .replace(R.id.container1, DetailedContactFragment(id) { -> onRefreshFragment() })
-                .commit()
-        }else{
-            fragmentManager.beginTransaction()
-                .replace(R.id.container, DetailedContactFragment(id) { -> onRefreshFragment() })
-                .addToBackStack("detailed_fragment")
-                .commit()
-        }
-    }
     fun onRefreshFragment(){
         val fragmentContainer = findViewById<FrameLayout>(R.id.container1)
         if ( fragmentContainer != null){
@@ -72,4 +53,11 @@ class MainActivity : AppCompatActivity() {
             fragTransaction.commit()
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return true
+    }
+
+
+
 }

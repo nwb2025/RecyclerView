@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="20dp">
+    <TextView
+        android:id="@+id/name_person"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="Alex Max"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/num_person"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="8(950)-558-27-70"
+        android:maxLength="16"
+        android:textColor="@color/blue"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/name_person"
+        android:layout_marginTop="2dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
